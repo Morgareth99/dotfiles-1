@@ -1,0 +1,58 @@
+#! /bin/zsh
+ws1= # main
+ws2= # web
+ws3= # mail
+ws4= # code
+ws5= # math [infinity]  (term icon)
+
+bspc monitor -d $ws1 $ws2 $ws3 $ws4 $ws5 
+
+
+# ------------
+# bspwm config
+# ------------
+bspc config window_gap          10
+bspc config border_width        2
+bspc config pointer_follows_focus false
+bspc config top_padding 12
+bspc config split_ratio         0.52
+bspc config borderless_monocle  true
+bspc config gapless_monocle     true
+bspc config focus_by_distance   true
+bspc config focus_follows_pointer true
+
+
+#--------------
+# Border Colors
+#--------------
+bspc config focused_border_color        "white"
+bspc config focused_locked_border_color "#dc322f"
+bspc config active_border_color         "grey"
+bspc config active_locked_border_color  "#d33682"
+bspc config normal_border_color       "#b58900"
+bspc config normal_locked_border_color  "#3F3E3B"
+bspc config presel_border_color         "orange"
+bspc config urgent_border_color         "#93a1a1"
+
+
+# ------------------
+# Autostart Programs
+# ------------------
+panel &
+#compton -b 
+numlockx on &
+
+
+#----------------
+# Set wallpaper
+#----------------
+feh --bg-scale Wallpapers/FWG_2560x1440.jpg 
+
+# -----
+# Rules
+# -----
+
+bspc rule -a Firefox desktop=^2
+bspc rule -a mpv floating=on
+bspc rule -a termite floating=on
+bspc rule -a feh floating=true
