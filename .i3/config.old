@@ -42,28 +42,13 @@ bindsym $mod+Return exec termite
 
 #Print
 bindsym --release Print exec --no-startup-id scrot %Y-%m-%d-%T.png -e 'mv $f ~/Imagens'
-#Chromium
-bindsym Mod1+shift+a exec --no-startup-id chromium
-#Thunar
-bindsym Mod1+r exec --no-startup-id thunar
+#firefox
+bindsym Mod1+shift+a exec --no-startup-id firefox
 
-#Oblogout
-bindsym --release Menu  exec --no-startup-id  oblogout
-
-bindsym Mod1+Up exec --no-startud-id "amixer sset Master 5%+"
-bindsym Mod1+Down exec --no-startud-id "amixer sset Master 5%-"
-bindsym Mod1+space exec --no-startud-id "amixer -q sset Master toggle"
-
-#bindcode $mod+Mod1+43 exec ~/.i3/i3_focus_or_run.sh -t htop ~/bin/terminal htop
-# weechat (mod+winkey+i)
-#bindcode $mod+Mod1+31 exec ~/.i3/i3_focus_or_run.sh -t weechat ~/bin/terminal weechat
-# firefox (mod+winkey+m)
-#bindcode $mod+Mod1+58 exec ~/.i3/i3_focus_or_run.sh -c firefox firefox
-# virtualbox (mod+winkey+v)
-#bindcode $mod+Mod1+55 exec ~/.i3/i3_focus_or_run.sh -c VirtualBox VirtualBox
-# mldonky (mod+winkey+t)
-#bindcode $mod+Mod1+28 exec ~/.i3/i3_focus_or_run.sh -t mldonkey ~/bin/terminal mldonkey
-
+bindsym XF86AudioLowerVolume exec ponymix decrease 10
+bindsym XF86AudioRaiseVolume exec ponymix increase 10
+bindsym XF86AudioMute exec ponymix mute
+bindsym XF86Tools exec ponymix unmute
  
 ##======================================================================================
 ##======================================================================================
@@ -73,7 +58,7 @@ bindsym Mod1+space exec --no-startud-id "amixer -q sset Master toggle"
 #exec --no-startup-id sh ~/.i3/wallpaper 
 exec --no-startup-id numlockx on
 exec --no-startup-id compton -b 
-exec --no-startup-id  feh --bg-scale Wallpapers/arch-linux-wallpaper-8.png      
+exec --no-startup-id  feh --bg-scale Wallpapers/war.png   
 #exec --no-startup-id conky -c ~/conky/conkyrc0  
 
 ##======================================================================================
@@ -187,8 +172,6 @@ bindsym $mod+6 workspace $WS6
 bindsym $mod+7 workspace $WS7
 bindsym $mod+8 workspace $WS8
 bindsym $mod+9 workspace $WS9
-
-##======================================================================================
 ##======================================================================================
 ##======================================================================================
  
@@ -220,27 +203,10 @@ set $WS9 IX
 ##======================================================================================
 ##======================================================================================
 
-#assign application to workspace
+# Assign applications to specific WS
 
-assign [class="Iceweasel"] 2:www
-assign [class="(i)VirtualBox"] 3:vbox
-assign [instance="(?i)TeamViewer.exe"] 4:vnc
-#assign [class="Firefox"] → 2
-#assign [class="Google-chrome"] → 2
-#assign [class="vlc"] → 4
-#assign [class="xv/mplayer"] → 4
-#assign [class="Gimp"] → 3
-#assign [class="Zathura"] → 5
-
-# Layout
-for_window [class="(?i)feh"] floating enable
-for_window [class="(?i)gcolor2"] floating enable
-for_window [class="(?i)gbdfed"] floating enable
-for_window [class="(?i)lxappearance"] floating enable
-for_window [instance="(?i)TeamViewer.exe"] floating enable
-for_window [class="(?i)VirtualBox"] floating enable
-for_window [class="(?i)mplayer2"] floating enable
-for_window [instance="(?i)mplayer2"] floating enable
+#assign [class="Termite"] $WS1
+#assign [class="Firefox"] $WS2
 
 ##======================================================================================
 ##======================================================================================
@@ -253,6 +219,26 @@ bindsym $mod+Shift+c reload
  
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+ 
+##======================================================================================
+##======================================================================================
+ 
+# power #
+
+set $mode_system State (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id /home/$USER/.i3/i3exit lock, mode "default"
+    bindsym e exec --no-startup-id /home/$USER/.i3/i3exit logout, mode "default"
+    bindsym s exec --no-startup-id /home/$USER/.i3/i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id /home/$USER/.i3/i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id /home/$USER/.i3/i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id /home/$USER/.i3/i3exit shutdown, mode "default"  
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Pause mode "$mode_system"
+
  
 ##======================================================================================
 ##======================================================================================
@@ -289,5 +275,28 @@ bindsym $mod+r mode "resize"
  
 
 bar {
-  i3bar_command ~/.i3/lemonbar/i3_lemonbar.sh
+   status_command i3blocks 
+   position top
+mode dock
+workspace_buttons yes
+binding_mode_indicator yes
+font pango: Font Awesome  8
+  colors {
+               background #252525
+               separator  #444444
+               statusline #009BD0
+
+ # class 		                  border    backgrd    text
+               focused_workspace  #196584 #FABD2F #191919
+               active_workspace   #565656 #444444 #eeeeee
+               inactive_workspace #373737 #222222 #bbbbbb
+               urgent_workspace   #7E1919 #770000 #eeeeee
+
+
+    }
+
 }
+
+
+##======================================================================================
+##======================================================================================
