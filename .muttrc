@@ -4,9 +4,9 @@
 
   set imap_user = "Youruser@gmail.com"
   set imap_pass = "Yourpass"
-  set smtp_url  = "smtp://youruser@smtp.gmail.com:587/"
-  set smtp_pass = "yourpass"
-  set from      = "youruser@gmail.com"
+  set smtp_url  = "smtp://Youruser@smtp.gmail.com:587/"
+  set smtp_pass = "Yourpass"
+  set from      = "Youruser@gmail.com"
   set realname  = "Realname"
 
   set spoolfile = imaps://imap.gmail.com:993/INBOX
