@@ -8,8 +8,6 @@ Bspwm
  
 ![link](https://github.com/Morgareth/Dotfiles/blob/master/Screenshots/2016-05-03-11:03:18.png "Screenshot")
 
-Ncmpcpp
-
 
 # Author
 [Morgareth][facebook]
